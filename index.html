@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Full Screen Live Stream</title>
+    <style>
+        /* Eliminates borders and scrollbars for a true full-screen look */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Container designed to override desktop mode scaling */
+        .stream-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        /* The iframe scales to fit the viewport exactly */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Backup link styling if the iframe gets blocked */
+        .fallback-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .fallback-overlay a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stream-wrapper" id="playerContainer">
+        <iframe 
+            src="https://ok.ru/videoembed/15174081388058" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="fallback-overlay">
+        <a href="https://ok.ru/video/15174081388058" target="_blank" rel="noopener">Open Directly in OK.ru</a>
+    </div>
+
+    <script>
+        // JavaScript Fix for "Desktop Mode" on Mobile
+        // This recalculates the layout based on the actual visual viewport,
+        // ignoring the fake desktop dimensions forced by the mobile browser.
+        function forceMobileFill() {
+            const wrapper = document.getElementById('playerContainer');
+            if (window.visualViewport) {
+                // Uses visual viewport to get the actual physical screen dimensions
+                wrapper.style.width = window.visualViewport.width + 'px';
+                wrapper.style.height = window.visualViewport.height + 'px';
+            } else {
+                wrapper.style.width = window.innerWidth + 'px';
+                wrapper.style.height = window.innerHeight + 'px';
+            }
+        }
+
+        // Run on load, resize, or orientation change
+        window.addEventListener('resize', forceMobileFill);
+        window.addEventListener('DOMContentLoaded', forceMobileFill);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', forceMobileFill);
+        }
+    </script>
+</body>
+</html>
