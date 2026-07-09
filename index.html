@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Forces proper mobile scaling by default -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Full Screen Live Stream</title>
     <style>
@@ -66,21 +67,20 @@
 <body>
 
     <div class="stream-wrapper" id="playerContainer">
+        <!-- OK.ru Updated Video Link -->
         <iframe 
-            src="https://lordatomic.github.io/uefa/mala.html" 
+            src="https://ok.ru/videoembed/15862838140459" 
             allow="autoplay; fullscreen" 
             allowfullscreen>
         </iframe>
     </div>
 
     <div class="fallback-overlay">
-        <a href="https://instagram.com/unfav.mibssm" target="_blank" rel="noopener">fifa.mibsam.online</a>
+        <a href="https://ok.ru/video/15174081388058" target="_blank" rel="noopener">unfav.mibssm</a>
     </div>
 
     <script>
         // JavaScript Fix for "Desktop Mode" on Mobile
-        // This recalculates the layout based on the actual visual viewport,
-        // ignoring the fake desktop dimensions forced by the mobile browser.
         function forceMobileFill() {
             const wrapper = document.getElementById('playerContainer');
             if (window.visualViewport) {
@@ -102,3 +102,4 @@
     </script>
 </body>
 </html>
+  
